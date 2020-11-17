@@ -4,10 +4,12 @@ import { View, TextInput, Button, Image, ImageBackground, Alert } from "react-na
 import LinearGradient from 'react-native-linear-gradient';
 import { Label } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage'
+import { useNavigation } from '@react-navigation/native';
 
 import estilo from "./estilo";
 
 function RecuperarSenha() {
+    const navigation = useNavigation();
     const [cpf, setCpf] = useState("");
     const [senha, setSenha] = useState("");
     const [novaSenha, setNovaSenha] = useState("");
@@ -17,13 +19,12 @@ function RecuperarSenha() {
             if (senha == novaSenha) {
                 try {
                     const value = await AsyncStorage.getItem(cpf);
-
                     let meuJson = JSON.parse(value);
                     if (meuJson.cpf == cpf) {
                         meuJson.senha = novaSenha;
                         await AsyncStorage.setItem(cpf, JSON.stringify(meuJson));
-                        Alert.alert(""
-                            , 'Senha alterada com sucesso');
+                        Alert.alert("", 'Senha alterada com sucesso');
+                        navigation.navigate('Index');
                     }
                 } catch (error) {
                     Alert.alert("", 'Usuário não encontrado no banco de dados!');

@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Text, View, ImageBackground, TouchableOpacity, Image, StyleSheet, PermissionsAndroid } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 import Geolocation from '@react-native-community/geolocation';
 
@@ -40,6 +40,7 @@ export default class App extends Component {
         if (this.props.route) {
             this.setState({ CPFUser: this.props.route.params.cpf })
             this.setState({ nomeUsuario: this.props.route.params.nomeUsuario })
+            global.cpf = this.state.CPFUser;
         }
         if (this.props.navigation == undefined) {
             this.setState({ mostrarMenu: false });
@@ -54,47 +55,63 @@ export default class App extends Component {
     }
 
     takePicture = async function () {
-        if (this.camera) {
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            {
 
-            var meuTitulo = `Usuario: ${this.state.nomeUsuario}
-                            ${new Date().toDateString()}
-                            ${new Date().toLocaleDateString()}`
-            this.setState({ myTitle: meuTitulo });
+            }
+        );
+        if (this.camera && granted === PermissionsAndroid.RESULTS.GRANTED) {
+
+            // var meuTitulo = `Usuario: ${this.state.nomeUsuario}
+            //                 ${new Date().toDateString()}
+            //                 ${new Date().toLocaleDateString()}`
+            // this.setState({ myTitle: meuTitulo });
 
             // var meusCadastros = '{"cadastros":[]}';
 
             let meuJson = {
-                id: new Date().toTimeString(),
+                id: new Date().getMilliseconds(),
                 usuario: this.state.nomeUsuario,
                 data: new Date().toDateString(),
                 hora: new Date().toTimeString(),
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
+                cpf: this.state.CPFUser,
             }
-            var path = RNFS.DocumentDirectoryPath + `/${this.state.CPFUser}.json`;
+
+            var path = RNFS.DownloadDirectoryPath + `/${this.state.CPFUser}.json`;
 
             RNFS.readFile(path, 'utf8').then((resp) => {
-                let meuArray = JSON.parse(meusCadastros).cadastros;
-                meuArray.push(meuJson);
-                var meusCadastros = JSON.parse(`{"cadastros":${meuArray}}`);
-                console.log(meusCadastros)
-                console.log(meuJson);
-            }).catch((err) => {
-                
-                return
                 console.log(path)
-                RNFS.writeFile(path, meuJson, 'utf8')
+                let cadastroInto = JSON.parse(resp)
+                let meuArray = cadastroInto.cadastros;
+                meuArray.push(meuJson);
+                cadastroInto.cadastros = meuArray;
+                console.warn(cadastroInto);
+
+                RNFS.writeFile(path, JSON.stringify(cadastroInto), 'utf8')
                     .then((success) => {
-                        console.log('FILE WRITTEN!');
+                        console.log('Arquivo Atualizado', JSON.stringify(cadastroInto));
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+
+            }).catch((err) => {
+                console.log('entrou no catch');
+                var objeto = new Object();
+                objeto.cadastros = new Array();
+                objeto.cadastros.push(meuJson);
+                console.log(path)
+                RNFS.writeFile(path, JSON.stringify(objeto), 'utf8')
+                    .then((success) => {
+                        console.log('Arquivo criado', JSON.stringify(objeto));
                     })
                     .catch((err) => {
                         console.log(err.message);
                     });
             })
-
-
-
-
 
 
             const options = { quality: 0.5, base64: true };

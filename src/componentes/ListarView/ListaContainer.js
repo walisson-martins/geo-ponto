@@ -13,6 +13,8 @@ function ListarView() {
     //     nomeUsuario: '',
     // }
 
+    console.warn(global.cpf)
+
     return (
         <>
             <View style={estilo.lista}>

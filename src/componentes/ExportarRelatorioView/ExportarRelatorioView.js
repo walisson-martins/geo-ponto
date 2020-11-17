@@ -7,6 +7,9 @@ import estilo from "./estilo";
 
 import Lista from '../ListarView/ListaContainer';
 
+import CsvDownload from 'react-json-to-csv'
+ 
+
 export default class ExportarRelatorioView extends Component {
 
     constructor(props) {
@@ -16,6 +19,7 @@ export default class ExportarRelatorioView extends Component {
             showToast: false
         };
     }
+
     render() {
         return (
             <Container>
@@ -42,6 +46,7 @@ export default class ExportarRelatorioView extends Component {
                             Alert.alert(
                                 "",
                                 "Exportando para CSV",
+                                // <CsvDownload data={} filename={"pontos.csv"} />
                             )
                         }} >
                             <Thumbnail source={{ uri: 'https://cdn2.vectorstock.com/i/1000x1000/40/71/csv-file-document-icon-vector-24704071.jpg' }} />

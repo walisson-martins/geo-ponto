@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button, Image, ImageBackground, Alert } from "react-native";
-
 import AsyncStorage from '@react-native-community/async-storage'
 
 //import do LinearGradient -> dependência.
@@ -15,7 +14,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default class Index extends Component {
     // function Index({ navigation }) {
-
     state = {
         nome: '',
         email: '',
@@ -35,6 +33,7 @@ export default class Index extends Component {
 
     gravar = async () => {
 
+        const { navigation } = this.props;
         var usuarios = {
             nome: this.state.nome,
             email: this.state.email,
@@ -49,7 +48,9 @@ export default class Index extends Component {
 
         try {
             await AsyncStorage.setItem(this.state.cpf, JSON.stringify(usuarios))
-            alert('Usuário salvo com sucesso');
+            alert('');
+            Alert.alert("Cadastrado!"
+                , 'Usuário salvo com sucesso');
             navigation.navigate('Index');
         } catch (error) {
             // Alert.alert('Problema ao criar o usuário:', 'Erro ao salvar o usuário no firebase');
@@ -175,7 +176,7 @@ export default class Index extends Component {
                                         if (this.state.nome != '' && this.state.email != '' && this.state.cpf != '' && this.state.tel != '' && this.state.empresa != '' && this.state.cargo != '' && this.state.senha != '') {
                                             this.gravar();
                                         } else {
-                                            alert('Todos os campos são obrigatórios')
+                                            Alert.alert("", 'Todos os campos são obrigatórios')
                                         }
                                         // Alert.alert(
                                         //     "",
