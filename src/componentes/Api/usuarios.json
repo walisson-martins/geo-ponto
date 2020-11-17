@@ -1,0 +1,35 @@
+{
+    "usuarios": [
+        {
+            "id": "1",
+            "nome": "Walisson",
+            "email": "walisson.martinsti@gmail.com",
+            "cpf": "04961632139",
+            "telefone": "993787400",
+            "empresa": "basis",
+            "cargo": "Desenvolvedor",
+            "senha": "1234"
+        },
+        {
+            "id": "2",
+            "nome": "Andre",
+            "email": "andre@gmail.com",
+            "cpf": "12345678912",
+            "telefone": "993787400",
+            "empresa": "basis",
+            "cargo": "Desenvolvedor",
+            "senha": "1234"
+        },
+        {
+            "id": "3",
+            "nome": "Luciano",
+            "email": "luciano@gmail.com",
+            "cpf": "12345678901",
+            "telefone": "993787400",
+            "empresa": "basis",
+            "cargo": "Desenvolvedor",
+            "senha": "1234"
+        }
+    ]
+}
+

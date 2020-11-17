@@ -1,0 +1,18 @@
+{
+    "cadastro-ponto": [
+        {
+            "id": "1",
+            "nome": "Walisson",
+            "horario-entrada": "",
+            "horario-saida": "",
+            "localizacao": ""
+        },
+        {
+            "id": "2",
+            "nome": "Lucio",
+            "horario-entrada": "",
+            "horario-saida": "",
+            "localizacao": ""
+        }
+    ]
+}

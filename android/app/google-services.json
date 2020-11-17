@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "495236095918",
+    "firebase_url": "https://geoponto-291623.firebaseio.com",
+    "project_id": "geoponto-291623",
+    "storage_bucket": "geoponto-291623.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495236095918:android:9a5aafcc7e3a04bbde323f",
+        "android_client_info": {
+          "package_name": "com.geoponto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495236095918-7ajkjq6vukulo40r28vbutilgm1vop0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxHKXUgK-dOtL3HOz3kRCcUVpEA6SSoro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495236095918-7ajkjq6vukulo40r28vbutilgm1vop0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
